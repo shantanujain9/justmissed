@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:justmissed/screens/home_page.dart';
 import 'package:justmissed/screens/chat_page.dart';
 import 'package:justmissed/screens/profile_page.dart';
 
