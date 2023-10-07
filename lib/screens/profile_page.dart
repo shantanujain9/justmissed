@@ -8,6 +8,10 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  bool _validateInput() {
+    return firstName.isNotEmpty && lastName.isNotEmpty;
+  }
+
   String firstName = ''; // Initialize with an empty first name
   String lastName = ''; // Initialize with an empty last name
   String instagramHandle = ''; // Initialize with an empty Instagram handle
@@ -28,6 +32,16 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
+  void _logout() {
+    // Implement logout logic here, such as clearing user data, etc.
+    Navigator.of(context).pop(); // Go back to the previous screen (login page)
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('You have been logged out.'),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,11 +56,22 @@ class _ProfilePageState extends State<ProfilePage> {
             // Profile Picture
             GestureDetector(
               onTap: _pickProfileImage,
-              child: CircleAvatar(
-                radius: 60.0,
-                backgroundImage: profileImagePath.isNotEmpty
-                    ? FileImage(File(profileImagePath))
-                    : const AssetImage('assets/default_profile.png') as ImageProvider,
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    radius: 60.0,
+                    backgroundImage: profileImagePath.isNotEmpty
+                        ? FileImage(File(profileImagePath))
+                        : const AssetImage('assets/default_profile.png')
+                            as ImageProvider,
+                  ),
+                  const SizedBox(height: 10.0),
+                  Text(
+                    '$firstName $lastName',
+                    style: const TextStyle(
+                        fontSize: 18.0, fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 10.0),
@@ -65,6 +90,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   firstName = value;
                 });
               },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your first name';
+                }
+                return null;
+              },
             ),
             const SizedBox(height: 20.0),
 
@@ -77,14 +108,20 @@ class _ProfilePageState extends State<ProfilePage> {
                   lastName = value;
                 });
               },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your last name';
+                }
+                return null;
+              },
             ),
             const SizedBox(height: 20.0),
 
             // Instagram Handle
             TextFormField(
               controller: instagramController,
-              decoration:
-                  const InputDecoration(labelText: 'Instagram Handle (optional)'),
+              decoration: const InputDecoration(
+                  labelText: 'Instagram Handle (optional)'),
               onChanged: (value) {
                 setState(() {
                   instagramHandle = value;
@@ -96,10 +133,33 @@ class _ProfilePageState extends State<ProfilePage> {
             // Save Button
             ElevatedButton(
               onPressed: () {
-                // Implement logic to save the user's profile information
-                // You can use the values of firstName, lastName, instagramHandle, and profileImagePath here.
+                if (_validateInput()) {
+                  // First name and last name are not empty, implement logic to save the user's profile information
+                  // You can use the values of firstName, lastName, instagramHandle, and profileImagePath here.
+
+                  // Show a confirmation message
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: const Text('Changes have been saved.'),
+                    ),
+                  );
+                } else {
+                  // Show an error message or alert to inform the user that first name and last name are mandatory.
+                  // You can use a Snackbar or showDialog for this.
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: const Text('Please fill in the required fields.'),
+                    ),
+                  );
+                }
               },
               child: const Text('Save Profile'),
+            ),
+
+            // Logout Button
+            ElevatedButton(
+              onPressed: _logout,
+              child: const Text('Logout'),
             ),
           ],
         ),
