@@ -32,10 +32,10 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile Page'),
+        title: const Text('Profile Page'),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -46,52 +46,52 @@ class _ProfilePageState extends State<ProfilePage> {
                 radius: 60.0,
                 backgroundImage: profileImagePath.isNotEmpty
                     ? FileImage(File(profileImagePath))
-                    : AssetImage('assets/default_profile.png') as ImageProvider,
+                    : const AssetImage('assets/default_profile.png') as ImageProvider,
               ),
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             ElevatedButton(
               onPressed: _pickProfileImage,
-              child: Text('Change Profile Picture'),
+              child: const Text('Change Profile Picture'),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
 
             // First Name
             TextFormField(
               controller: firstNameController,
-              decoration: InputDecoration(labelText: 'First Name'),
+              decoration: const InputDecoration(labelText: 'First Name'),
               onChanged: (value) {
                 setState(() {
                   firstName = value;
                 });
               },
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
 
             // Last Name
             TextFormField(
               controller: lastNameController,
-              decoration: InputDecoration(labelText: 'Last Name'),
+              decoration: const InputDecoration(labelText: 'Last Name'),
               onChanged: (value) {
                 setState(() {
                   lastName = value;
                 });
               },
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
 
             // Instagram Handle
             TextFormField(
               controller: instagramController,
               decoration:
-                  InputDecoration(labelText: 'Instagram Handle (optional)'),
+                  const InputDecoration(labelText: 'Instagram Handle (optional)'),
               onChanged: (value) {
                 setState(() {
                   instagramHandle = value;
                 });
               },
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
 
             // Save Button
             ElevatedButton(
@@ -99,7 +99,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 // Implement logic to save the user's profile information
                 // You can use the values of firstName, lastName, instagramHandle, and profileImagePath here.
               },
-              child: Text('Save Profile'),
+              child: const Text('Save Profile'),
             ),
           ],
         ),
