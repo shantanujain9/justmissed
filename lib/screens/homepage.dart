@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart';
-import 'chat_page.dart';
-import 'profile_page.dart';
+import 'package:justmissed/screens/home_page.dart';
+import 'package:justmissed/screens/chat_page.dart';
+import 'package:justmissed/screens/profile_page.dart';
 
 class HomePage extends StatefulWidget {
   @override

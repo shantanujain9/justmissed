@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:justmissed/screens/registration_page.dart';
+import 'package:justmissed/screens/homepage.dart';
 
 void main() {
   runApp(LoginApp());
@@ -48,6 +49,13 @@ class LoginPage extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     // Handle login logic here
+                    bool isAuthenticated = true; 
+                    if (isAuthenticated) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                        );
+                        }
                   },
                   child: Text('Login'),
                 ),
