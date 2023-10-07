@@ -24,7 +24,8 @@ class LoginPage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('screens/JustMissedLogo.png'), // Replace with your image path
+            image: AssetImage(
+                'screens/JustMissedLogo.png'), // Replace with your image path
             fit: BoxFit.cover,
           ),
         ),
