@@ -23,8 +23,7 @@ class LoginPage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-                'screens/Just Missed Logo .png'), // Replace with your image path
+            image: AssetImage('screens/JustMissedLogo.png'), // Replace with your image path
             fit: BoxFit.cover,
           ),
         ),
@@ -36,7 +35,7 @@ class LoginPage extends StatelessWidget {
               children: <Widget>[
                 // Centered Image
                 Image.asset(
-                  'screens/Just Missed Logo .png', // Replace with your image path
+                  'screens/JustMissedLogo.png', // Replace with your image path
                   width: 100.0, // Set width as needed
                   height: 100.0, // Set height as needed
                 ),
