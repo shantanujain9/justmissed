@@ -110,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     );
                   },
-                  child: const Text("Registration Page"),
+                  child: Text("Registration Page"),
                 )
               ],
             ),
