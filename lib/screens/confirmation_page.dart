@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:justmissed/screens/login.dart'; // Import your login page if it's in a different file.
 
 class ConfirmationPage extends StatelessWidget {
   final String email;
@@ -28,6 +29,19 @@ class ConfirmationPage extends StatelessWidget {
             Text('Username: $username'),
             Text('First Name: $firstName'),
             Text('Last Name: $lastName'),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Navigate back to the login page when the button is pressed
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginPage(), // Replace LoginPage with your actual login page
+                  ),
+                );
+              },
+              child: Text('Back to Login'),
+            ),
           ],
         ),
       ),
