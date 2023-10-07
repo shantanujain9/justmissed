@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:justmissed/screens/login.dart'; 
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -34,10 +35,14 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void _logout() {
     // Implement logout logic here, such as clearing user data, etc.
-    Navigator.of(context).pop(); // Go back to the previous screen (login page)
+    Navigator.of(context).pushReplacement(
+    MaterialPageRoute(
+      builder: (context) => LoginPage(),
+    ),
+  );
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text('You have been logged out.'),
+      const SnackBar(
+        content: Text('You have been logged out.'),
       ),
     );
   }
@@ -139,16 +144,16 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   // Show a confirmation message
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: const Text('Changes have been saved.'),
+                    const SnackBar(
+                      content: Text('Changes have been saved.'),
                     ),
                   );
                 } else {
                   // Show an error message or alert to inform the user that first name and last name are mandatory.
                   // You can use a Snackbar or showDialog for this.
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: const Text('Please fill in the required fields.'),
+                    const SnackBar(
+                      content: Text('Please fill in the required fields.'),
                     ),
                   );
                 }
