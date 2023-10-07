@@ -5,7 +5,6 @@ import 'package:justmissed/screens/login.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
-  print("LOL")
   runApp(const MyApp());
 }
 
