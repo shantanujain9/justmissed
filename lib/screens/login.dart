@@ -25,7 +25,8 @@ class LoginPage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('lib/screens/JustMissedLogo.png'), // Replace with your image path
+            image: AssetImage(
+                'lib/screens/JustMissedLogo.png'), // Replace with your image path
             fit: BoxFit.cover,
           ),
         ),
@@ -49,13 +50,13 @@ class LoginPage extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     // Handle login logic here
-                    bool isAuthenticated = true; 
+                    bool isAuthenticated = true;
                     if (isAuthenticated) {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => HomePage()),
-                        );
-                        }
+                      );
+                    }
                   },
                   child: Text('Login'),
                 ),
