@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:justmissed/screens/chat_page.dart';
 import 'package:justmissed/screens/profile_page.dart';
+import 'package:justmissed/screens/home_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -10,7 +11,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   final List<Widget> _pages = [
-    HomePage(),
+    HomePage2(),
     ChatPage(),
     ProfilePage(),
   ];
