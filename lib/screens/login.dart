@@ -24,7 +24,7 @@ class LoginPage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('screens/JustMissedLogo.png'), // Replace with your image path
+            image: AssetImage('lib/screens/JustMissedLogo.png'), // Replace with your image path
             fit: BoxFit.cover,
           ),
         ),
@@ -35,11 +35,6 @@ class LoginPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 // Centered Image
-                Image.asset(
-                  'screens/JustMissedLogo.png', // Replace with your image path
-                  width: 100.0, // Set width as needed
-                  height: 100.0, // Set height as needed
-                ),
                 SizedBox(height: 20.0),
                 TextField(
                   decoration: InputDecoration(labelText: 'Username'),
