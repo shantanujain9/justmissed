@@ -22,7 +22,7 @@ class LoginPage extends StatelessWidget {
       ),
       body: Container(
         decoration: BoxDecoration(
-          color: Colors.blue, // Set the background color here
+          color: Color.fromARGB(173, 86, 3, 3), // Set the background color here
         ),
         child: Center(
           child: Padding(
