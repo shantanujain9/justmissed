@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "498627684982",
+    "project_id": "justmissed-ae374",
+    "storage_bucket": "justmissed-ae374.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:498627684982:android:b4deb76ea4893356f24d57",
+        "android_client_info": {
+          "package_name": "com.example.justmissed"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBd5ZSq4v3Ocbz5axpByj_0rbTAE7UiuXQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
