@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import 'package:justmissed/screens/login.dart'; 
+import 'package:justmissed/screens/login.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -16,7 +16,7 @@ class _ProfilePageState extends State<ProfilePage> {
   String firstName = ''; // Initialize with an empty first name
   String lastName = ''; // Initialize with an empty last name
   String instagramHandle = ''; // Initialize with an empty Instagram handle
-  String profileImagePath = ''; // Initialize with an empty profile image path
+  File? profileImage; // Store the selected profile image
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController instagramController = TextEditingController();
@@ -28,18 +28,48 @@ class _ProfilePageState extends State<ProfilePage> {
 
     if (pickedFile != null) {
       setState(() {
-        profileImagePath = pickedFile.path;
+        profileImage = File(pickedFile.path); // Store the selected image file
       });
     }
   }
 
+  // Method to build the profile picture widget
+Widget _buildProfilePicture() {
+  return Column(
+    children: [
+      CircleAvatar(
+        radius: 60.0,
+        backgroundColor: Colors.red,
+        child: profileImage != null
+            ? null // No child when an image is selected
+            : Icon(
+                Icons.person, // You can use any appropriate icon here
+                size: 60.0,
+                color: Colors.white, // You can set the icon color
+              ),
+        backgroundImage: profileImage != null
+            ? null
+            : null, // Use null for the backgroundImage if no image is selected
+      ),
+      const SizedBox(height: 10.0),
+      Text(
+        '$firstName $lastName',
+        style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+      ),
+    ],
+  );
+}
+
+
+
+
   void _logout() {
     // Implement logout logic here, such as clearing user data, etc.
     Navigator.of(context).pushReplacement(
-    MaterialPageRoute(
-      builder: (context) => LoginPage(),
-    ),
-  );
+      MaterialPageRoute(
+        builder: (context) => LoginPage(),
+      ),
+    );
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('You have been logged out.'),
@@ -61,23 +91,7 @@ class _ProfilePageState extends State<ProfilePage> {
             // Profile Picture
             GestureDetector(
               onTap: _pickProfileImage,
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 60.0,
-                    backgroundImage: profileImagePath.isNotEmpty
-                        ? FileImage(File(profileImagePath))
-                        : const AssetImage('assets/default_profile.png')
-                            as ImageProvider,
-                  ),
-                  const SizedBox(height: 10.0),
-                  Text(
-                    '$firstName $lastName',
-                    style: const TextStyle(
-                        fontSize: 18.0, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
+              child: _buildProfilePicture(),
             ),
             const SizedBox(height: 10.0),
             ElevatedButton(
@@ -140,7 +154,7 @@ class _ProfilePageState extends State<ProfilePage> {
               onPressed: () {
                 if (_validateInput()) {
                   // First name and last name are not empty, implement logic to save the user's profile information
-                  // You can use the values of firstName, lastName, instagramHandle, and profileImagePath here.
+                  // You can use the values of firstName, lastName, instagramHandle, and profileImage here.
 
                   // Show a confirmation message
                   ScaffoldMessenger.of(context).showSnackBar(
