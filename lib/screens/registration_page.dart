@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:justmissed/confirmation_page.dart';
+import 'package:justmissed/screens/confirmation_page.dart';
 
 class RegistrationPage extends StatelessWidget {
   // Define variables to store user input
