@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+
 import 'package:justmissed/screens/login.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -37,24 +38,26 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget _buildProfilePicture() {
     return Column(
       children: [
-        CircleAvatar(
-          radius: 60.0,
-          backgroundColor: Colors.red,
-          child: profileImage != null
-              ? null // No child when an image is selected
-              : Icon(
-                  Icons.person, // You can use any appropriate icon here
-                  size: 60.0,
-                  color: Colors.white, // You can set the icon color
-                ),
-          backgroundImage: profileImage != null
-              ? null
-              : null, // Use null for the backgroundImage if no image is selected
+        GestureDetector(
+          onTap: _pickProfileImage,
+          child: CircleAvatar(
+            radius: 60.0,
+            backgroundColor: Colors.red,
+            backgroundImage:
+                profileImage != null ? FileImage(profileImage!) : null,
+            child: profileImage == null
+                ? Icon(
+                    Icons.camera_alt,
+                    size: 40.0,
+                    color: Colors.white,
+                  )
+                : null,
+          ),
         ),
         const SizedBox(height: 10.0),
-        Text(
-          '$firstName $lastName',
-          style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+        ElevatedButton(
+          onPressed: _pickProfileImage,
+          child: const Text('Change Profile Picture'),
         ),
       ],
     );
@@ -91,11 +94,6 @@ class _ProfilePageState extends State<ProfilePage> {
               child: _buildProfilePicture(),
             ),
             const SizedBox(height: 10.0),
-            ElevatedButton(
-              onPressed: _pickProfileImage,
-              child: const Text('Change Profile Picture'),
-            ),
-            const SizedBox(height: 20.0),
 
             // First Name
             TextFormField(
@@ -182,4 +180,10 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: ProfilePage(),
+  ));
 }

@@ -1,8 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
+import 'package:firebase_core/firebase_core.dart';
 import 'package:justmissed/screens/registration_page.dart';
 import 'package:justmissed/screens/homepage.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(LoginApp());
 }
 
@@ -22,35 +27,62 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
 
   bool isLoginButtonEnabled = false;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void initState() {
     super.initState();
 
-    // Add listeners to the text controllers
+    // Add a listener to the text controller
     usernameController.addListener(validateInputs);
-    passwordController.addListener(validateInputs);
   }
 
   @override
   void dispose() {
-    // Clean up the controllers when they are no longer needed
+    // Clean up the controller when it is no longer needed
     usernameController.dispose();
-    passwordController.dispose();
     super.dispose();
   }
 
   void validateInputs() {
     final username = usernameController.text;
-    final password = passwordController.text;
 
-    // Check if both username and password are not empty
+    // Check if the username is not empty
     setState(() {
-      isLoginButtonEnabled = username.isNotEmpty && password.isNotEmpty;
+      isLoginButtonEnabled = username.isNotEmpty;
     });
+  }
+
+  Future<void> signInWithUsername() async {
+    try {
+      final username = usernameController.text;
+
+      // Fetch the user document by username
+      final userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .where('username', isEqualTo: username)
+          .limit(1)
+          .get();
+
+      if (userDoc.docs.isNotEmpty) {
+        // Username exists, allow the user to sign in
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                HomePage(username), // Pass the username to the HomePage
+          ),
+        );
+      } else {
+        // User with the provided username doesn't exist, show an error message
+        print('User not found');
+      }
+    } catch (e) {
+      print('Error signing in: $e');
+      // Handle sign-in errors here (e.g., show an error message)
+    }
   }
 
   @override
@@ -78,27 +110,12 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: const InputDecoration(labelText: 'Username'),
                 ),
                 const SizedBox(height: 20.0),
-                TextField(
-                  controller: passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(labelText: 'Password'),
-                ),
-                const SizedBox(height: 20.0),
                 ElevatedButton(
                   onPressed: isLoginButtonEnabled
                       ? () {
-                          // Handle login logic here
-                          bool isAuthenticated = true;
-                          if (isAuthenticated) {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HomePage(),
-                              ),
-                            );
-                          }
+                          signInWithUsername();
                         }
-                      : null, // Disable the button if inputs are empty
+                      : null, // Disable the button if the username is empty
                   child: const Text('Login'),
                 ),
                 ElevatedButton(

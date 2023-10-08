@@ -4,6 +4,8 @@ import 'package:justmissed/screens/profile_page.dart';
 import 'package:justmissed/screens/home_page.dart';
 
 class HomePage extends StatefulWidget {
+  HomePage(String username);
+
   @override
   _HomePageState createState() => _HomePageState();
 }

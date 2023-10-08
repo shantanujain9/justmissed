@@ -1,14 +1,12 @@
 class User {
-  int num = 0;
+  String id = "";
   String firstname = "";
   String email = "";
+  String username = "";
   String password = "";
   String lastname = "";
-  User(
-    this.num,
-    this.firstname,
-    this.email,
-    this.password,
-    this.lastname,
-  );
+  double longitude = 0;
+  double langitude = 0;
+  User(this.id, this.firstname, this.lastname, this.username, this.email,
+      this.password, this.longitude, this.langitude);
 }

@@ -34,6 +34,7 @@ class _ConfirmRequestState extends State<ConfirmRequest> {
 
   @override
   Widget build(BuildContext context) {
+    String username = "l";
     return Scaffold(
       appBar: AppBar(
         title: Text('Two Buttons Page'),
@@ -97,7 +98,7 @@ class _ConfirmRequestState extends State<ConfirmRequest> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => HomePage(),
+                      builder: (context) => HomePage(username),
                     ),
                   );
                 },
