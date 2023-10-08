@@ -3,6 +3,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 import 'package:justmissed/models/accept.dart';
+import 'package:justmissed/screens/homepage.dart';
 
 class ConfirmRequest extends StatefulWidget {
   @override
@@ -71,7 +72,15 @@ class _ConfirmRequestState extends State<ConfirmRequest> {
               Text('Last Name: $lastName'),
               const SizedBox(height: 40.0),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  // Navigate back to the login page when the button is pressed
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AcceptPage(),
+                    ),
+                  );
+                },
                 style: ElevatedButton.styleFrom(primary: Colors.green),
                 child: Text(
                   'Accept',
@@ -88,7 +97,7 @@ class _ConfirmRequestState extends State<ConfirmRequest> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AcceptPage(),
+                      builder: (context) => HomePage(),
                     ),
                   );
                 },

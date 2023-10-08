@@ -36,7 +36,8 @@ class ConfirmationPage extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LoginPage(), // Replace LoginPage with your actual login page
+                    builder: (context) =>
+                        LoginPage(), // Replace LoginPage with your actual login page
                   ),
                 );
               },
