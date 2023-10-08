@@ -34,34 +34,31 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   // Method to build the profile picture widget
-Widget _buildProfilePicture() {
-  return Column(
-    children: [
-      CircleAvatar(
-        radius: 60.0,
-        backgroundColor: Colors.red,
-        child: profileImage != null
-            ? null // No child when an image is selected
-            : Icon(
-                Icons.person, // You can use any appropriate icon here
-                size: 60.0,
-                color: Colors.white, // You can set the icon color
-              ),
-        backgroundImage: profileImage != null
-            ? null
-            : null, // Use null for the backgroundImage if no image is selected
-      ),
-      const SizedBox(height: 10.0),
-      Text(
-        '$firstName $lastName',
-        style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-      ),
-    ],
-  );
-}
-
-
-
+  Widget _buildProfilePicture() {
+    return Column(
+      children: [
+        CircleAvatar(
+          radius: 60.0,
+          backgroundColor: Colors.red,
+          child: profileImage != null
+              ? null // No child when an image is selected
+              : Icon(
+                  Icons.person, // You can use any appropriate icon here
+                  size: 60.0,
+                  color: Colors.white, // You can set the icon color
+                ),
+          backgroundImage: profileImage != null
+              ? null
+              : null, // Use null for the backgroundImage if no image is selected
+        ),
+        const SizedBox(height: 10.0),
+        Text(
+          '$firstName $lastName',
+          style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+        ),
+      ],
+    );
+  }
 
   void _logout() {
     // Implement logout logic here, such as clearing user data, etc.
