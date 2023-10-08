@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:justmissed/screens/confirmation_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -118,6 +119,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     print('Username: $username');
                     print('First Name: $firstName');
                     print('Last Name: $lastName');
+
+                    // Save data to Firestore
+                    CollectionReference users =
+                        FirebaseFirestore.instance.collection('users');
+                    users.add({
+                      'email': email,
+                      'username': username,
+                      'firstName': firstName,
+                      'lastName': lastName
+                    }).then((value) {
+                      print("User Added");
+                    }).catchError((error) {
+                      print("Failed to add user: $error");
+                    });
 
                     // Navigate to the confirmation page and pass data
                     Navigator.push(
