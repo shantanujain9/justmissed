@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:justmissed/models/accept.dart';
+import 'package:justmissed/screens/confirm_Request.dart';
 import 'dart:io';
 
 import 'package:justmissed/screens/login.dart';
@@ -73,6 +75,20 @@ class _ProfilePageState extends State<ProfilePage> {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('You have been logged out.'),
+      ),
+    );
+  }
+
+  void _lccept() {
+    // Implement logout logic here, such as clearing user data, etc.
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => ConfirmRequest(),
+      ),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('AcceptTime'),
       ),
     );
   }
@@ -174,6 +190,34 @@ class _ProfilePageState extends State<ProfilePage> {
             ElevatedButton(
               onPressed: _logout,
               child: const Text('Logout'),
+            ),
+            ElevatedButton(
+              onPressed: _lccept,
+              child: const Text('Accept Page'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (_validateInput()) {
+                  // First name and last name are not empty, implement logic to save the user's profile information
+                  // You can use the values of firstName, lastName, instagramHandle, and profileImage here.
+
+                  // Show a confirmation message
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Changes have been saved.'),
+                    ),
+                  );
+                } else {
+                  // Show an error message or alert to inform the user that first name and last name are mandatory.
+                  // You can use a Snackbar or showDialog for this.
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Please fill in the required fields.'),
+                    ),
+                  );
+                }
+              },
+              child: const Text('Save Profile'),
             ),
           ],
         ),
